@@ -2,18 +2,7 @@ import streamlit as st
 from streamlit_authenticator import Authenticate
 from streamlit_option_menu import option_menu
 
-lesDonneesDesComptes = {'usernames': {'nico': {'name': 'utilisateur',
-   'password': 'cc',
-   'email': 'utilisateur@gmail.com',
-   'failed_login_attemps': 0, # Sera géré automatiquement
-   'logged_in': False, # Sera géré automatiquement
-   'role': 'utilisateur'},
-  'root': {'name': 'root',
-   'password': 'rootMDP',
-   'email': 'admin@gmail.com',
-   'failed_login_attemps': 0, # Sera géré automatiquement
-   'logged_in': False, # Sera géré automatiquement
-   'role': 'administrateur'}}}
+lesDonnesdesComptes = pd.read_csv(comptes_utilisateurs.csv)
 
 authenticator = Authenticate(
     lesDonneesDesComptes, # Les données des comptes
