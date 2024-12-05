@@ -3,21 +3,19 @@ from streamlit_authenticator import Authenticate
 from streamlit_option_menu import option_menu
 import pandas as pd
 
-def lire_donnees_comptes(csv_file):
-    df = pd.read_csv(csv_file)
-    comptes = {'usernames': {}}
-    for index, row in df.iterrows():
-        comptes['usernames'][row['name']] = {
-            'name': row['name'],
-            'password': row['password'],
-            'email': row['email'],
-            'failed_login_attempts': row['failed_login_attempts'],
-            'logged_in': row['logged_in'],
-            'role': row['role']
-        }
-    return comptes
-# Lire les données des comptes à partir du fichier CSV
-lesDonneesDesComptes = lire_donnees_comptes('comptes_utilisateurs.csv')
+lesDonneesDesComptes = {'usernames': {'nico': {'name': 'utilisateur',
+   'password': 'cc',
+   'email': 'utilisateur@gmail.com',
+   'failed_login_attemps': 0, # Sera géré automatiquement
+   'logged_in': False, # Sera géré automatiquement
+   'role': 'utilisateur'},
+  'root': {'name': 'root',
+   'password': 'rootMDP',
+   'email': 'admin@gmail.com',
+   'failed_login_attemps': 0, # Sera géré automatiquement
+   'logged_in': False, # Sera géré automatiquement
+   'role': 'administrateur'}}}
+
 authenticator = Authenticate(
     lesDonneesDesComptes,  # Les données des comptes
     "cookie_name",  # Le nom du cookie, un str quelconque
