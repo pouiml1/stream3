@@ -17,13 +17,6 @@ lesDonneesDesComptes = {'usernames': {'nico': {'name': 'utilisateur',
    'role': 'administrateur'}}}
 
 authenticator = Authenticate(
-    lesDonneesDesComptes,  # Les données des comptes
-    "cookie_name",  # Le nom du cookie, un str quelconque
-    "cookie_key",  # La clé du cookie, un str quelconque
-    30  # Le nombre de jours avant que le cookie expire
-)
-
-authenticator = Authenticate(
     lesDonneesDesComptes, # Les données des comptes
     "cookie name", # Le nom du cookie, un str quelconque
     "cookie key", # La clé du cookie, un str quelconque
