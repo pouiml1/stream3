@@ -2,11 +2,27 @@ import streamlit as st
 from streamlit_authenticator import Authenticate
 from streamlit_option_menu import option_menu
 
-lesDonneesDesComptes = st.file_uploader("comptes_utilisateurs.csv", type={"csv", "txt"})
-if lesDonneesDesComptes is not None:
-    lesDonneesDesComptes = pd.read_csv(lesDonneesDesComptes)
-st.write(lesDonneesDesComptes)
-
+def lire_donnees_comptes(csv_file):
+    df = pd.read_csv(csv_file)
+    comptes = {'usernames': {}}
+    for index, row in df.iterrows():
+        comptes['usernames'][row['name']] = {
+            'name': row['name'],
+            'password': row['password'],
+            'email': row['email'],
+            'failed_login_attempts': row['failed_login_attempts'],
+            'logged_in': row['logged_in'],
+            'role': row['role']
+        }
+    return comptes
+# Lire les données des comptes à partir du fichier CSV
+lesDonneesDesComptes = lire_donnees_comptes('comptes_utilisateurs.csv')
+authenticator = Authenticate(
+    lesDonneesDesComptes,  # Les données des comptes
+    "cookie_name",  # Le nom du cookie, un str quelconque
+    "cookie_key",  # La clé du cookie, un str quelconque
+    30  # Le nombre de jours avant que le cookie expire
+)
 
 authenticator = Authenticate(
     lesDonneesDesComptes, # Les données des comptes
@@ -19,7 +35,7 @@ authenticator.login()
 
 def accueil():
       with st.sidebar:
-        selected = option_menu("Main Menu", ["Accueil", 'Les photos de mon chat'], 
+        selected = option_menu("Main Menu", ["Accueil", 'Les photos de mon chat'], authenticator.logout("Déconnexion"),
         icons=['house', 'gear'], menu_icon="cast", default_index=1)
         selected
       if selected == "Accueil" :
@@ -45,7 +61,7 @@ if st.session_state["authentication_status"]:
   accueil()
 
   # Le bouton de déconnexion
-  authenticator.logout("Déconnexion")
+  
 
   
 elif st.session_state["authentication_status"] is False:
