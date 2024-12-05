@@ -18,7 +18,7 @@ authenticator.login()
 
 def accueil():
       with st.sidebar:
-        selected = option_menu("Main Menu", ["Accueil", 'Les photos de mon chat'], authenticator.logout("Déconnexion"), 
+        selected = option_menu("Main Menu", ["Accueil", 'Les photos de mon chat'], 
         icons=['house', 'gear'], menu_icon="cast", default_index=1)
         selected
       if selected == "Accueil" :
@@ -42,6 +42,9 @@ def accueil():
 
 if st.session_state["authentication_status"]:
   accueil()
+    
+# Le bouton de déconnexion
+authenticator.logout("Déconnexion")
 
   
 elif st.session_state["authentication_status"] is False:
