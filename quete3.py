@@ -7,6 +7,7 @@ if lesDonneesDesComptes is not None:
     lesDonneesDesComptes = pd.read_csv(lesDonneesDesComptes)
 st.write(lesDonneesDesComptes)
 
+
 authenticator = Authenticate(
     lesDonneesDesComptes, # Les données des comptes
     "cookie name", # Le nom du cookie, un str quelconque
@@ -42,9 +43,9 @@ def accueil():
 
 if st.session_state["authentication_status"]:
   accueil()
-    
-# Le bouton de déconnexion
-authenticator.logout("Déconnexion")
+
+  # Le bouton de déconnexion
+  authenticator.logout("Déconnexion")
 
   
 elif st.session_state["authentication_status"] is False:
