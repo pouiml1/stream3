@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_authenticator import Authenticate
 from streamlit_option_menu import option_menu
+import pandas as pd
 
 def lire_donnees_comptes(csv_file):
     df = pd.read_csv(csv_file)
