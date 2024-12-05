@@ -18,11 +18,9 @@ authenticator.login()
 
 def accueil():
       with st.sidebar:
-        selected = option_menu("Main Menu", ["Accueil", 'Les photos de mon chat'], 
+        selected = option_menu("Main Menu", ["Accueil", 'Les photos de mon chat'], authenticator.logout("Déconnexion"), 
         icons=['house', 'gear'], menu_icon="cast", default_index=1)
         selected
-          # Le bouton de déconnexion
-        authenticator.logout("Déconnexion")
       if selected == "Accueil" :
             st.title("Bienvenue sur ma page")
             st.image("https://www.shutterstock.com/shutterstock/photos/2269063761/display_1500/stock-photo-the-crowd-in-a-fan-zone-in-a-concert-hall-raised-hands-during-a-music-show-2269063761.jpg")
